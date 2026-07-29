@@ -1,7 +1,110 @@
-# eHiCA
-**eHiCA (enhanced Hi-C analysis)** is a locus-centric framework designed to map chromatin interactions from enhanced Hi-C data and facilitate interpretation of GWAS associations.
+# eHiCA (enhanced Hi-C analysis)
 
-# Requirements
-Python (pandas), and R
-bedtools
-UCSC utilities (bedToBigBed)
+![eHiCA](/doc/eHiCA.png)
+
+**eHiCA** is a locus-centric framework designed to map chromatin interactions from enhanced Hi-C data and facilitate interpretation of non-coding GWAS associations.
+
+## Running
+
+The main entry point is:
+
+```bash
+bash run.eHiCA.sh bait_request.csv sample.info.tsv output_directory
+```
+
+Arguments:
+
+| Argument | Description |
+|---|---|
+| `bait_request.csv` | CSV file listing one or more bait loci to analyze. |
+| `sample.info.tsv` | Tab-delimited sample metadata file. |
+| `output_directory` | Directory where eHiCA outputs will be written. |
+
+
+## Requirements
+
+- Python 3
+- `numpy`
+- `pandas`
+
+- R
+- `Gviz`
+- `GenomicRanges`
+- `tidyr`
+- `rtracklayer`
+- `RColorBrewer`
+- `pheatmap`
+
+- bedToBigBed is required to convert BED files into UCSC-compatible bigBed files.
+- bedtools
+
+## Required input files
+
+### 1. Bait request file
+
+Example: `bait_request.csv`
+
+```csv
+Bait_coordinates,Identifier,hub_location
+chr19:43098003-43102003,chr19_psg_bait_test3,https://example-bucket.s3.amazonaws.com/Project_TrackHub
+```
+
+Columns:
+
+| Column | Description |
+|---|---|
+| `Bait_coordinates` | Genomic bait interval in `chr:start-end` format. |
+| `Identifier` | Unique label for the locus/analysis. Used in output file and track names. |
+| `hub_location` | Public URL location where the UCSC track hub will be hosted. |
+
+### 2. Sample metadata file
+
+The sample file is expected to be tab-delimited and contain a header. The workflow uses the following columns:
+
+| Column | Description |
+|---|---|
+| `datapath` | Path to the directory containing per-sample anchor interaction files. |
+| `Sample_name` | Sample ID used in filenames and heatmaps. |
+| `Group` | Biological or analysis group. |
+| `CellType` | Cell type label used for grouping tracks and heatmaps. |
+| `Heatmap_grouping` | Higher-level grouping used to generate grouped heatmaps. |
+
+Example:
+
+```text
+datapath	Sample_name	Group	CellType	Heatmap_grouping
+/path/to/sample1	Sample1	Control	Neuron	Brain
+/path/to/sample2	Sample2	Case	Neuron	Brain
+```
+
+## Example run
+
+```bash
+mkdir -p results
+bash run.eHiCA.sh bait_request.csv sample.info.tsv results
+```
+
+---
+
+## UCSC Genome Browser
+
+The workflow generates a UCSC track hub structure similar to:
+
+```text
+results/<Bait_coordinates>/<Identifier>/
+├── hub.txt
+├── genomes.txt
+└── hg38/
+    ├── trackDb.txt
+    ├── sample1.bb
+    ├── sample2.bb
+    └── BAIT.bb
+```
+
+To visualize the tracks in UCSC Genome Browser:
+
+1. Upload or sync the generated hub directory to the public location specified in `hub_location`.
+2. Open the hub URL listed in `track_hub_url.txt`.
+3. Confirm that the bigBed files are publicly accessible from the same location as the hub files.
+
+---
