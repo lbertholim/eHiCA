@@ -6,8 +6,6 @@
 
 ## Running
 
-The main entry point is:
-
 ```bash
 bash run.eHiCA.sh bait_request.csv sample.info.tsv output_directory
 ```
