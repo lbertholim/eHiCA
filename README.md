@@ -1,6 +1,6 @@
 # eHiCA (enhanced Hi-C analysis)
 
-![eHiCA](/doc/eHiCA.png)
+<img src="/doc/eHiCA.png" width="50%">
 
 **eHiCA** is a locus-centric framework designed to map chromatin interactions from enhanced Hi-C data and facilitate interpretation of non-coding GWAS associations.
 
