@@ -2,7 +2,7 @@
 
 <img src="/doc/eHiCA.png" width="50%">
 
-**eHiCA** is a locus-centric framework designed to map chromatin interactions from DeepLoop-enhanced Hi-C datasets (`chr*.denoised.anchor.to.anchor`), generating heatmaps, combined interaction matrices, and UCSC Genome Browser track hubs for visualization.
+**eHiCA** is a locus-centric framework designed to map chromatin interactions from DeepLoop-enhanced Hi-C datasets, generating heatmaps, combined interaction matrices, and UCSC Genome Browser track hubs for visualization.
 
 ## Running
 
