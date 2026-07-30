@@ -35,8 +35,8 @@ Arguments:
 - `RColorBrewer`
 - `pheatmap`
 
-- bedToBigBed is required to convert BED files into UCSC-compatible bigBed files.
-- bedtools
+- `bedToBigBed` is required to convert BED files into UCSC-compatible bigBed files.
+- `bedtools`
 
 ## Required input files
 
@@ -127,7 +127,7 @@ results/<Bait_coordinates>/<Identifier>/
 
 To visualize the tracks in UCSC Genome Browser:
 
-1. Upload or sync the generated hub directory to the public location specified in `hub_location`.
+1. Upload the generated hub directory to the public location specified in `hub_location`.
 2. Open the hub URL listed in `track_hub_url.txt`.
 3. Confirm that the bigBed files are publicly accessible from the same location as the hub files.
 
